@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login Form</h2>
+        <form id="loginForm">
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" >
+                <div id="usernameError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email"  >
+                <div id="emailError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" >
+                <div id="passwordError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="repassword">Re-enter Password</label>
+                <input id="repassword"  >
+                <div id="repasswordError" class="error"></div>
+            </div>
+
+            <button type="button" class="btn" onclick="validate()">Submit</button>
+
+            <!-- <div id="formSuccess" class="success"></div> -->
+        </form>
+    </div>
+
+    <script>
+        function validate() {
+            
+            document.getElementById('usernameError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+            document.getElementById('passwordError').innerText = '';
+            document.getElementById('repasswordError').innerText = '';
+            // document.getElementById('formSuccess').innerText = '';
+
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const repassword = document.getElementById('repassword').value;
+
+           
+            if (username.length <= 5) {
+                document.getElementById('usernameError').innerText = "Username must be more than 5 characters.";
+                 
+            }
+
+        
+            const emailRegex =/^[a-zA-Z0-9]+@[a-z]+.[a-z]{2,}$/
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').innerText = "Please enter a valid email.";
+                 
+            }
+
+          
+            const passwordRegex = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{6,}$/; 
+
+            if (!passwordRegex.test(password)) {
+                document.getElementById('passwordError').innerText = "Password must be at least 6 characters long.";
+                
+            }
+
+            
+            if (password !== repassword) {
+                document.getElementById('repasswordError').innerText = "Passwords do not match.";
+               
+            }
+
+            
+            document.getElementById('formSuccess').innerText = "Form successfully submitted!";
+            return true; 
+        }
+    </script>
+
+</body>
+</html>
